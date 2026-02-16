@@ -30,6 +30,7 @@ sed -i "s/hostname='.*'/hostname='OpenWrt'/g" package/base-files/files/bin/confi
 #sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION=''|g" package/base-files/files/etc/openwrt_release
 #sed -i "s|DISTRIB_DESCRIPTION='.*'|DISTRIB_DESCRIPTION='OpenWrt %V %C'|g" package/base-files/files/etc/openwrt_release
 sed -i 's/%D/OpenWrt/g' package/base-files/files/usr/lib/os-release
+sed -i 's/%d/OpenWrt/g' package/base-files/files/usr/lib/os-release
 
 # 修改IP地址
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
