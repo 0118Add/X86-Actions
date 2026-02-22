@@ -90,6 +90,23 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-ho
 # mihomo
 git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
 
+# golang 1.26
+rm -rf feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+
+# luci-app-filemanager
+rm -rf feeds/luci/applications/luci-app-filemanager
+git clone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
+
+# Realtek driver - R8168 & R8125 & R8126 & R8152 & R8101 & r8127
+rm -rf package/kernel/{r8168,r8101,r8125,r8126,r8127}
+git clone https://github.com/sbwml/package_kernel_r8168 package/kernel/r8168
+git clone https://github.com/sbwml/package_kernel_r8152 package/kernel/r8152
+git clone https://github.com/sbwml/package_kernel_r8101 package/kernel/r8101
+git clone https://github.com/sbwml/package_kernel_r8125 package/kernel/r8125
+git clone https://github.com/sbwml/package_kernel_r8126 package/kernel/r8126
+git clone https://github.com/sbwml/package_kernel_r8127 package/kernel/r8127
+
 # 修改插件名字
 #sed -i 's/Frp 内网穿透/内网穿透/g' package/luci-app-frpc/po/zh-cn/frp.po
 #sed -i 's/Alist 文件列表/云盘/g' package/luci-app-alist/po/zh-cn/alist.po
