@@ -54,7 +54,7 @@
 		
 		local run_time = luci.sys.exec("awk '{print int($1/86400)\"天 \"int($1%86400/3600)\"时 \"int($1%86400%3600/60)\"分 \"int($1%60)\"秒\"}' /proc/uptime")
 
-                                local cpu_usage = (luci.sys.exec("expr 100 - $(top -n 1 | grep -E '^CPU:' | awk -F '%' '{print$4}' | awk -F ' ' '{print$2}' | awk '{print int($1 + 0.5)}')") or "6") .. "%"
+        local cpu_usage = (luci.sys.exec("expr 100 - $(top -n 1 | grep -E '^CPU:' | awk -F '%' '{print$4}' | awk -F ' ' '{print$2}' | awk '{print int($1 + 0.5)}')") or "6") .. "%"
 
 		local rv = {
 			cpuusage    = cpu_usage,
@@ -63,7 +63,7 @@
 			userinfo    = user_info,
 			uptime     = sysinfo.uptime or 0,
 			runtime = run_time,
-                                                localtime  = os.date("%Y年%m月%d日") .. " " .. translate(os.date("%A")) .. " " .. os.date("%X"),
+            localtime  = os.date("%Y年%m月%d日") .. " " .. translate(os.date("%A")) .. " " .. os.date("%X"),
 			loadavg    = sysinfo.load or { 0, 0, 0 },
 			memory     = meminfo,
 			memcached  = mem_cached,
@@ -671,7 +671,8 @@
 				for (var i in ports)
 				{
 					tmp = tmp + String.format(
-							'<td style="text-align:center"><span style="line-height:25px">%s</span><br /><small><img src="<%=resource%>/icons/%s" /><br />%s<br />%s</small></td>',							ports[i].name,
+							'<td style="text-align:center"><span style="line-height:25px">%s</span><br /><small><img src="<%=resource%>/icons/%s" /><br />%s<br />%s</small></td>',							
+						    ports[i].name,
 							ports[i].status ? 'port_up.png' : 'port_down.png',
 							ports[i].speed,
 							ports[i].duplex ? '<%:full-duplex%>' : '<%:half-duplex%>');
@@ -686,9 +687,9 @@
 				e.innerHTML = String.format('%t', info.uptime);
 
 			if (e = document.getElementById('runtime'))
-                                e.innerHTML = info.runtime;
+                e.innerHTML = info.runtime;
 
-                        if (e = document.getElementById('userinfo'))
+            if (e = document.getElementById('userinfo'))
 				e.innerHTML = info.userinfo;
 
 			if (e = document.getElementById('cpuinfo'))
@@ -752,7 +753,7 @@
 		<tr><td width="33%"><%:Local Time%></td><td id="localtime">-</td></tr>
 		<tr><td width="33%"><%:Uptime%></td><td id="runtime">-</td></tr>
 		<tr><td width="33%"><%:实时负载%></td><td id="cpuusage">-</td></tr>
-                <tr><td width="33%"><%:Load Average%></td><td id="loadavg">-</td></tr>
+        <tr><td width="33%"><%:Load Average%></td><td id="loadavg">-</td></tr>
 	</table>
 </fieldset>
 
