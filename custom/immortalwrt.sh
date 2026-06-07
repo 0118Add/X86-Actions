@@ -102,6 +102,10 @@ git_sparse_clone master https://github.com/8688Add/openwrt_pkgs daed
 #sed -i 's/PKG_VERSION:=.*/PKG_VERSION:=2026.06.05/g' package/dae/Makefile
 #sed -i 's/PKG_SOURCE_VERSION:=.*/PKG_SOURCE_VERSION:=ba50380e15649b0c83ec04c07f355dece19b0cea/g' package/dae/Makefile
 
+# bpf-headers - 6.18
+sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
+curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
+
 # golang 1.26
 rm -rf feeds/packages/lang/golang
 git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
