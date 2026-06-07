@@ -45,14 +45,11 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7:::/g' package/base-files/files/etc/shadow
 
 #添加额外软件包
-rm -rf feeds/packages/net/{dae,xray-core}
+rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-passwall,luci-app-openclash,luci-app-mjpg-streamer}
+rm -rf feeds/packages/net/{dae,daed,xray-core}
 #git clone --depth=1 -b openwrt-23.05 https://github.com/openwrt/openwrt openwrt-openwrt 
 #cp -rf openwrt-openwrt/package/libs/mbedtls package/libs/mbedtls
 #rm -rf feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/luci/applications/luci-app-dae
-rm -rf feeds/luci/applications/luci-app-passwall
-rm -rf feeds/luci/applications/luci-app-openclash
-rm -rf feeds/luci/applications/luci-app-mjpg-streamer
 #rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 #git clone https://github.com/jerrykuku/luci-app-vssr.git package/luci-app-vssr
 #git clone https://github.com/jerrykuku/lua-maxminddb.git package/lua-maxminddb
@@ -77,8 +74,6 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-ho
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo  package/OpenWrt-momo
 
 # dae
-rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed}
-rm -rf feeds/packages/net/{dae,daed}
 git_sparse_clone kix https://github.com/QiuSimons/luci-app-dae luci-app-dae
 git_sparse_clone master https://github.com/8688Add/openwrt_pkgs dae
 sed -i 's/PKG_VERSION:=.*/PKG_VERSION:=2026.06.05/g' package/dae/Makefile
