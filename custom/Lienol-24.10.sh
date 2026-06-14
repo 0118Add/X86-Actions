@@ -81,7 +81,7 @@ sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
 # autocore
-git clone --depth=1 -b openwrt-24.10 https://github.com/8688Add/autocore-arm package/autocore
+git clone --depth=1 -b openwrt-24.10 https://github.com/sbwml/autocore-arm package/autocore
 #git_sparse_clone main https://github.com/0118Add/Openwrt-CI autocore
 
 # Default settings
@@ -154,6 +154,11 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 git clone --depth 1 -b dev https://github.com/immortalwrt/homeproxy package/luci-app-homeproxy
 sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
 sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
+
+# daed
+git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add luci-app-daed openwrt-einat-ebpf
+sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' package/openwrt-einat-ebpf/Makefile
+git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # mihomo
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
