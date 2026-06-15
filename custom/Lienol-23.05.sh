@@ -96,7 +96,7 @@ rm -rf feeds/packages/lang/node
 git clone --depth=1 -b packages-23.05 https://github.com/sbwml/feeds_packages_lang_node-prebuilt feeds/packages/lang/node
 
 # 移除重复软件包
-rm -rf feeds/other/lean/autocore
+rm -rf feeds/lienol/other/lean/autocore
 rm -rf package/public/autocore
 rm -rf package/public/autosamba
 #rm -rf package/kernel/r8152
