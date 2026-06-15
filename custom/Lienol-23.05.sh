@@ -82,20 +82,29 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # golang 1.24
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+
+# 预编译 node
+rm -rf feeds/packages/lang/node
+git clone --depth=1 -b packages-23.05 https://github.com/sbwml/feeds_packages_lang_node-prebuilt feeds/packages/lang/node
 
 # 移除重复软件包
 rm -rf feeds/other/lean/autocore
+rm -rf package/public/autocore
 rm -rf package/public/autosamba
-rm -rf package/kernel/r8152
-rm -rf feeds/packages/net/{sing-box,xray-core}
-rm -rf feeds/other/luci-app-diskman
-rm -rf feeds/other/luci-app-dockerman
-rm -rf feeds/other/lean/luci-app-autoreboot
-rm -rf feeds/other/lean/luci-app-turboacc
-rm -rf feeds/other/lean/luci-app-zerotier
+#rm -rf package/kernel/r8152
+rm -rf feeds/packages/net/{sing-box,v2ray-geodata,xray-core,zerotier}
+rm -rf feeds/lienol/other/luci-app-diskman
+rm -rf feeds/lienol/other/luci-app-dockerman
+rm -rf feeds/lienol/other/lean/luci-app-autoreboot
+rm -rf feeds/lienol/other/lean/luci-app-turboacc
+rm -rf feeds/lienol/other/lean/luci-app-zerotier
 rm -rf feeds/luci/applications/luci-app-alist
+rm -rf feeds/luci/applications/luci-app-dockerman
+rm -rf feeds/luci/applications/luci-app-filemanager
 rm -rf feeds/luci/applications/luci-app-smartdns
+rm -rf feeds/luci/applications/luci-app-ttyd
+rm -rf feeds/luci/applications/luci-app-ramfree
 rm -rf feeds/lienol/luci-app-ramfree
 rm -rf target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch
 rm -rf target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
@@ -104,14 +113,14 @@ rm -rf target/linux/generic/hack-6.1/953-net-patch-linux-kernel-to-support-short
 rm -rf target/linux/generic/hack-6.6/952-add-net-conntrack-events-support-multiple-registrant.patch
 
 # 添加额外软件包
-git clone https://github.com/0118Add/X86-N1-Actions package/autocore
 #git clone https://github.com/jerrykuku/lua-maxminddb package/lua-maxminddb
 #git clone https://github.com/0118Add/luci-app-vssr package/luci-app-vssr
 #git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 #git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall-luci
-git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
+#git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/openwrt-passwall
+#git_sparse_clone main https://github.com/Openwrt-Passwall/openwrt-passwall-packages v2ray-geodata
 #git clone https://github.com/sbwml/openwrt_helloworld package/openwrt_helloworld
-#git_sparse_clone main https://github.com/kiddin9/kwrt-packages luci-app-autoreboot luci-app-diskman luci-app-ramfree
+#git_sparse_clone main https://github.com/kiddin9/kwrt-packages coremark
 #git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
 #git clone https://github.com/sbwml/luci-app-alist.git package/alist
 #git clone https://github.com/QiuSimons/luci-app-daed-next package/luci-app-daed-next
@@ -121,10 +130,10 @@ git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt
 #git clone https://github.com/justice2001/luci-app-multi-frpc package/luci-app-multi-frpc
 #git clone https://github.com/sirpdboy/luci-app-advanced.git package/luci-app-advanced
 git clone -b dev --depth 1 https://github.com/vernesong/OpenClash package/OpenClash
-git clone https://github.com/EasyTier/luci-app-easytier package/luci-app-easytier
-git clone https://github.com/asvow/luci-app-tailscale  package/luci-app-tailscale
-git clone https://github.com/8688Add/luci-app-zerotier package/luci-app-zerotier
-git clone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
+#git clone https://github.com/EasyTier/luci-app-easytier package/luci-app-easytier
+#git clone https://github.com/asvow/luci-app-tailscale  package/luci-app-tailscale
+#git clone https://github.com/8688Add/luci-app-zerotier package/luci-app-zerotier
+#git clone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
 git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #git clone https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
 #git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic package/luci-app-unblockneteasemusic
@@ -137,33 +146,54 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #rm -rf feeds/packages/net/smartdns
 #cp -rf ${GITHUB_WORKSPACE}/general/smartdns feeds/packages/net
 
-#git clone --depth 1 -b dev https://github.com/immortalwrt/homeproxy package/homeproxy
-#sed -i "s/ImmortalWrt/OpenWrt/g" package/homeproxy/po/zh_Hans/homeproxy.po
-#sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
+git clone --depth 1 -b dev https://github.com/immortalwrt/homeproxy package/luci-app-homeproxy
+sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
+sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
+
+# daed
+#git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add luci-app-daed openwrt-einat-ebpf
+#sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' package/openwrt-einat-ebpf/Makefile
+#git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # mihomo
-git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
+#git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
+#git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
 #sed -i 's/MihomoTProxy/Mihomo/g' package/openwrt-mihomo/luci-app-mihomo/po/zh_Hans/mihomo.po
 #sed -i 's/MihomoTProxy/Mihomo/g' package/openwrt-mihomo/luci-app-mihomo/root/usr/share/luci/menu.d/luci-app-mihomo.json
 
 # turboacc
 #git clone https://github.com/chenmozhijin/turboacc package/new/luci-app-turboacc
-curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
-sed -i 's/Turbo ACC 网络加速/网络加速/g' package/turboacc/luci-app-turboacc/po/zh-cn/turboacc.po
+curl -sSL https://raw.githubusercontent.com/mufeng05/turboacc/main/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+sed -i 's/Turbo ACC 网络加速/网络加速/g' package/turboacc/luci-app-turboacc/po/zh_Hans/turboacc.po
 
 # 克隆immortalwrt-luci packages仓库
 git clone --depth=1 -b openwrt-24.10 https://github.com/immortalwrt/luci.git immortalwrt-luci
+cp -rf immortalwrt-luci/applications/luci-app-diskman feeds/luci/applications/luci-app-diskman
+ln -sf ../../../feeds/luci/applications/luci-app-diskman ./package/feeds/luci/luci-app-diskman
+cp -rf immortalwrt-luci/applications/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
+ln -sf ../../../feeds/luci/applications/luci-app-dockerman ./package/feeds/luci/luci-app-dockerman
 cp -rf immortalwrt-luci/applications/luci-app-msd_lite feeds/luci/applications/luci-app-msd_lite
 ln -sf ../../../feeds/luci/applications/luci-app-msd_lite ./package/feeds/luci/luci-app-msd_lite
+cp -rf immortalwrt-luci/applications/luci-app-ramfree feeds/luci/applications/luci-app-ramfree
+ln -sf ../../../feeds/luci/applications/luci-app-ramfree ./package/feeds/luci/luci-app-ramfree
+cp -rf immortalwrt-luci/applications/luci-app-ttyd feeds/luci/applications/luci-app-ttyd
+ln -sf ../../../feeds/luci/applications/luci-app-ttyd ./package/feeds/luci/luci-app-ttyd
 cp -rf immortalwrt-luci/applications/luci-app-unblockneteasemusic feeds/luci/applications/luci-app-unblockneteasemusic
 ln -sf ../../../feeds/luci/applications/luci-app-unblockneteasemusic ./package/feeds/luci/luci-app-unblockneteasemusic
+cp -rf immortalwrt-luci/applications/luci-app-zerotier feeds/luci/applications/luci-app-zerotier
+ln -sf ../../../feeds/luci/applications/luci-app-zerotier ./package/feeds/luci/luci-app-zerotier
 git clone --depth=1 -b openwrt-24.10 https://github.com/immortalwrt/packages.git immortalwrt-packages
 cp -rf immortalwrt-packages/net/msd_lite feeds/packages/net/msd_lite
 ln -sf ../../../feeds/packages/net/msd_lite ./package/feeds/packages/msd_lite
+cp -rf immortalwrt-packages/net/sing-box feeds/packages/net/sing-box
+ln -sf ../../../feeds/packages/net/sing-box ./package/feeds/packages/sing-box
+cp -rf immortalwrt-packages/net/xray-core feeds/packages/net/xray-core
+ln -sf ../../../feeds/packages/net/xray-core ./package/feeds/packages/xray-core
+cp -rf immortalwrt-packages/net/zerotier feeds/packages/net/zerotier
+ln -sf ../../../feeds/packages/net/zerotier ./package/feeds/packages/zerotier
 
 # 修改系统文件
-curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/general/25_storage.js > ./feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/25_storage.js
-#curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/general/os-release > package/base-files/files/etc/os-release
+#curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/general/25_storage.js > ./feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/25_storage.js
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 #sed -i 's/Argon 主题设置/Argon设置/g' feeds/luci/applications/luci-app-argon-config/po/zh-cn/argon-config.po
@@ -200,11 +230,9 @@ sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/
 sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/luasrc/view/dockerman/*.htm
 sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/luasrc/view/dockerman/cbi/*.htm
 
-# 调整 Zerotier 到 服务 菜单
-#sed -i 's/vpn/services/g' feeds/other/lean/luci-app-zerotier/luasrc/controller/*.lua
-#sed -i 's/vpn/services/g' feeds/other/lean/luci-app-zerotier/luasrc/model/cbi/zerotier/*.lua
-#sed -i 's/vpn/services/g' feeds/other/lean/luci-app-zerotier/luasrc/view/zerotier/*.htm
-#sed -i 's/vpn/services/g' package/luci-app-zerotier/root/usr/share/luci/menu.d/luci-app-zerotier.json
+# 调整 tailscale zerotier 到 服务 菜单
+#sed -i 's/vpn/services/g' feeds/luci/applications/luci-app-zerotier/root/usr/share/luci/menu.d/luci-app-zerotier.json
+#sed -i 's/vpn/services/g' package/luci-app-tailscale/root/usr/share/luci/menu.d/luci-app-tailscale.json
 
 # 调整 bypass 到 GFW 菜单
 #sed -i 's/services/vpn/g' package/luci-app-bypass/luasrc/controller/*.lua
@@ -255,12 +283,20 @@ sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/
 #sed -i 's/services/vpn/g' package/luci-app-openclash/luci-app-openclash/luasrc/model/cbi/openclash/*.lua
 #sed -i 's/services/vpn/g' package/luci-app-openclash/luci-app-openclash/luasrc/view/openclash/*.htm
 
-# 修正部分从第三方仓库拉取的软件 Makefile 路径问题
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/rust\/rust-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/rust\/rust-package.mk/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHREPO/PKG_SOURCE_URL:=https:\/\/github.com/g' {}
-find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHCODELOAD/PKG_SOURCE_URL:=https:\/\/codeload.github.com/g' {}
+# 自定义默认配置
+#curl -fsSL https://raw.githubusercontent.com/0118Add/Openwrt-CI/main/x86/diy/x86_lede/10_system.js > ./feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
+curl -fsSL https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/25_storage.js > ./feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/25_storage.js
+#curl -fsSL https://raw.githubusercontent.com/0118Add/Openwrt-CI/main/immortalwrt/29_ports.js > ./feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js
+
+# comment out the following line to restore the full description
+sed -i '/# timezone/i grep -q '\''/tmp/sysinfo/model'\'' /etc/rc.local || sudo sed -i '\''/exit 0/i [ "$(cat /sys\\/class\\/dmi\\/id\\/sys_vendor 2>\\/dev\\/null)" = "Default string" ] \&\& echo "x86_64" > \\/tmp\\/sysinfo\\/model'\'' /etc/rc.local\n' package/default-settings/default/zzz-default-settings
+sed -i '/# timezone/i sed -i "s/\\(DISTRIB_DESCRIPTION=\\).*/\\1'\''OpenWrt $(sed -n "s/DISTRIB_DESCRIPTION='\''OpenWrt \\([^ ]*\\) .*/\\1/p" /etc/openwrt_release)'\'',/" /etc/openwrt_release\nsource /etc/openwrt_release \&\& sed -i -e "s/distversion\\s=\\s\\".*\\"/distversion = \\"$DISTRIB_ID $DISTRIB_RELEASE ($DISTRIB_REVISION)\\"/g" -e '\''s/distname    = .*$/distname    = ""/g'\'' /usr/lib/lua/luci/version.lua\nsed -i "s/luciname    = \\".*\\"/luciname    = \\"LuCI openwrt-23.05\\"/g" /usr/lib/lua/luci/version.lua\nsed -i "s/luciversion = \\".*\\"/luciversion = \\"\\"/g" /usr/lib/lua/luci/version.lua\necho "export const revision = '\''\'\'', branch = '\''LuCI openwrt-23.05'\'';" > /usr/share/ucode/luci/version.uc\n/etc/init.d/rpcd restart\n' package/default-settings/default/zzz-default-settings
+#sed -i '/# timezone/i sed -i "s/\\(DISTRIB_DESCRIPTION=\\).*/\\1'\''OpenWrt $(sed -n "s/DISTRIB_DESCRIPTION='\''OpenWrt \\([^ ]*\\) .*/\\1/p" /etc/openwrt_release)'\'',/" /etc/openwrt_release\nsource /etc/openwrt_release \&\& sed -i -e "s/distversion\\s=\\s\\".*\\"/distversion = \\"$DISTRIB_ID $DISTRIB_RELEASE ($DISTRIB_REVISION)\\"/g" -e '\''s/distname    = .*$/distname    = ""/g'\'' /usr/lib/lua/luci/version.lua\nsed -i "s/luciname    = \\".*\\"/luciname    = \\"LuCI openwrt-23.05\\"/g" /usr/lib/lua/luci/version.lua\nsed -i "s/luciversion = \\".*\\"/luciversion = \\"v'$(date +%Y%m%d)'\\"/g" /usr/lib/lua/luci/version.lua\necho "export const revision = '\''v'$(date +%Y%m%d)'\'\'', branch = '\''LuCI openwrt-23.05'\'';" > /usr/share/ucode/luci/version.uc\n/etc/init.d/rpcd restart\n' package/default-settings/default/zzz-default-settings
+#curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/general/os-release > package/base-files/files/etc/os-release
+curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/scripts/os-release > package/base-files/files/etc/os-release
+
+#rm -rf feeds/packages/admin/zabbix
+#rm -rf feeds/packages/net/onionshare-cli
 
 ./scripts/feeds update -i
 ./scripts/feeds install -a
