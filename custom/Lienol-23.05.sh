@@ -89,7 +89,7 @@ git clone https://github.com/sbwml/default-settings package/default-settings
 
 # golang 1.24
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
 
 # 预编译 node
 rm -rf feeds/packages/lang/node
