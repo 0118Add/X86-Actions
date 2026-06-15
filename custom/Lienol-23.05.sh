@@ -80,6 +80,13 @@ sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535
 # 修正连接数
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
+# autocore
+git clone --depth=1 -b openwrt-23.05 https://github.com/sbwml/autocore-arm package/autocore
+
+# Default settings
+rm -rf package/default-settings
+git clone https://github.com/sbwml/default-settings package/default-settings
+
 # golang 1.24
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
