@@ -20,7 +20,7 @@ function git_sparse_clone() {
 }
 
 # 取消插件注释
-#sed -i 's/src-git video/#src-git video/g' feeds.conf.default
+sed -i 's/src-git video https://github.com/openwrt/video/#src-git video https://github.com/openwrt/video/g' feeds.conf.default
 
 # 修改默认IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
