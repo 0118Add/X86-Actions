@@ -19,7 +19,8 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
-sed -i '# src-git video https://github.com/openwrt/video' feeds.conf.default
+# 取消插件注释
+sed -i 's/src-git video/#src-git video/g' feeds.conf.default
 
 # 修改默认IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
