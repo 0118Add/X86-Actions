@@ -19,9 +19,6 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
-# 取消插件注释
-sed -i 's/src-git video https://github.com/openwrt/video/#src-git video https://github.com/openwrt/video/g' feeds.conf.default
-
 # 修改默认IP
 sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
@@ -31,7 +28,6 @@ sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535
 # 修正连接数
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
-rm -rf package/feeds/video/sdl3
 rm -rf package/emortal/automount
 rm -rf package/emortal/luci-app-athena-led
 git clone --depth=1 https://github.com/NONGFAH/luci-app-athena-led package/luci-app-athena-led
