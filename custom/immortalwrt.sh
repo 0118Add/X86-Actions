@@ -98,8 +98,7 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-ho
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo  package/OpenWrt-momo
 
 # daed
-git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add luci-app-daed openwrt-einat-ebpf
-sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' package/openwrt-einat-ebpf/Makefile
+git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed package/daed
 git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # bpf-headers - 6.18
