@@ -70,7 +70,7 @@ git clone https://github.com/sbwml/default-settings package/default-settings
 
 #添加额外软件包
 rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-passwall,luci-app-openclash,luci-app-mjpg-streamer}
-rm -rf feeds/packages/net/{dae,daed,xray-core}
+rm -rf feeds/packages/net/{dae,daed,xray-core,v2ray-geodata}
 #git clone --depth=1 -b openwrt-23.05 https://github.com/openwrt/openwrt openwrt-openwrt 
 #cp -rf openwrt-openwrt/package/libs/mbedtls package/libs/mbedtls
 #rm -rf feeds/luci/applications/luci-app-dockerman
