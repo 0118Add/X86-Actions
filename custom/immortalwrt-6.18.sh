@@ -46,7 +46,7 @@ sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7
 
 #添加额外软件包
 rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-passwall,luci-app-openclash,luci-app-mjpg-streamer}
-rm -rf feeds/packages/net/{dae,daed,xray-core}
+rm -rf feeds/packages/net/{dae,daed,xray-core,v2ray-geodata}
 #git clone --depth=1 -b openwrt-23.05 https://github.com/openwrt/openwrt openwrt-openwrt 
 #cp -rf openwrt-openwrt/package/libs/mbedtls package/libs/mbedtls
 #rm -rf feeds/luci/applications/luci-app-dockerman
@@ -74,8 +74,7 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-ho
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo  package/OpenWrt-momo
 
 # dae
-git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add luci-app-dae openwrt-einat-ebpf
-sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' package/openwrt-einat-ebpf/Makefile
+git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
 git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # bpf-headers - 6.18
