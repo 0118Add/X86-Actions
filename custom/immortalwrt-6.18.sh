@@ -74,7 +74,7 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-ho
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo  package/OpenWrt-momo
 
 # dae
-git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-dae luci-app-dae dae
 git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # bpf-headers - 6.18
