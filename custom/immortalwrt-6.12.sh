@@ -53,7 +53,7 @@ git clone https://github.com/sbwml/default-settings package/default-settings
 
 # 核心库
 rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed}
-rm -rf feeds/packages/net/{dae,daed,xray-core}
+rm -rf feeds/packages/net/{dae,daed,xray-core,v2ray-geodata}
 git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
 
 # openclash
@@ -73,8 +73,7 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-ho
 #git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
 
 # dae
-git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add luci-app-dae openwrt-einat-ebpf
-sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' package/openwrt-einat-ebpf/Makefile
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-dae luci-app-dae dae
 git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # partexp
