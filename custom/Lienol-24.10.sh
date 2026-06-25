@@ -158,8 +158,7 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/l
 wget -O package/luci-app-homeproxy/root/etc/init.d/homeproxy https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/homeproxy
 
 # daed
-git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add luci-app-daed openwrt-einat-ebpf
-sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' package/openwrt-einat-ebpf/Makefile
+git_sparse_clone kix https://github.com/QiuSimons/luci-app-daed daed luci-app-daed
 git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # mihomo
