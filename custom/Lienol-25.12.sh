@@ -165,12 +165,12 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 # dae daed
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
 #git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
-git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed package/daed
-git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
+#git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed package/daed
+#git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # bpf-headers - 6.18
-sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
-curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
+#sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
+#curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
 
 # turboacc
 #git clone https://github.com/chenmozhijin/turboacc package/turboacc
