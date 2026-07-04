@@ -110,8 +110,8 @@ rm -rf feeds/lienol/other/luci-app-dockerman
 rm -rf feeds/lienol/other/lean/luci-app-autoreboot
 rm -rf feeds/lienol/other/lean/luci-app-turboacc
 rm -rf feeds/lienol/other/lean/luci-app-zerotier
+rm -rf feeds/lienol/other/lean/luci-app-mtwifi
 rm -rf feeds/lienol/other/lean/luci-app-mwan3helper
-rm -rf feeds/lienol/luci-app-mtwifi
 rm -rf feeds/luci/applications/luci-app-alist
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filemanager
