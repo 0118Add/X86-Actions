@@ -28,7 +28,7 @@ sed -i "s/hostname='.*'/hostname='OpenWrt'/g" package/base-files/files/bin/confi
 #sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' BGG'/g" package/lean/default-settings/files/zzz-default-settings
 
 # 修改型号
-sed -i 's|echo "$vendor $product" >.*|echo "$vendor" > /tmp/sysinfo/model|' target/linux/x86/base-files/lib/preinit/01_sysinfo
+sed -i 's/echo "$vendor $product" >.*/echo "$vendor" > /tmp/sysinfo/model/g' target/linux/x86/base-files/lib/preinit/01_sysinfo
 #sed -i "s|echo "$vendor $product" > /tmp/sysinfo/model/echo "$vendor" > /tmp/sysinfo/model|g" target/linux/x86/base-files/lib/preinit/01_sysinfo
 
 # 修改默认IP
