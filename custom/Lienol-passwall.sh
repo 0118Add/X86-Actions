@@ -28,7 +28,6 @@ sed -i "s/hostname='.*'/hostname='OpenWrt'/g" package/base-files/files/bin/confi
 #sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' BGG'/g" package/lean/default-settings/files/zzz-default-settings
 
 # 修改型号
-#sed -i 's/echo "$vendor $product" >.*/echo "$vendor" > /tmp/sysinfo/model/g' target/linux/x86/base-files/lib/preinit/01_sysinfo
 sed -i 's/echo.*/echo "$vendor" > \/tmp\/sysinfo\/model/g' target/linux/x86/base-files/lib/preinit/01_sysinfo
 
 # 修改默认IP
@@ -293,7 +292,6 @@ sed -i '/# timezone/i sed -i "s/\\(DISTRIB_DESCRIPTION=\\).*/\\1'\''OpenWrt $(se
 #sed -i '/# timezone/i sed -i "s/\\(DISTRIB_DESCRIPTION=\\).*/\\1'\''OpenWrt $(sed -n "s/DISTRIB_DESCRIPTION='\''OpenWrt \\([^ ]*\\) .*/\\1/p" /etc/openwrt_release)'\'',/" /etc/openwrt_release\nsource /etc/openwrt_release \&\& sed -i -e "s/distversion\\s=\\s\\".*\\"/distversion = \\"$DISTRIB_ID $DISTRIB_RELEASE ($DISTRIB_REVISION)\\"/g" -e '\''s/distname    = .*$/distname    = ""/g'\'' /usr/lib/lua/luci/version.lua\nsed -i "s/luciname    = \\".*\\"/luciname    = \\"LuCI openwrt-24.10\\"/g" /usr/lib/lua/luci/version.lua\nsed -i "s/luciversion = \\".*\\"/luciversion = \\"v'$(date +%Y%m%d)'\\"/g" /usr/lib/lua/luci/version.lua\necho "export const revision = '\''v'$(date +%Y%m%d)'\'\'', branch = '\''LuCI openwrt-24.10'\'';" > /usr/share/ucode/luci/version.uc\n/etc/init.d/rpcd restart\n' package/default-settings/default/zzz-default-settings
 #curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/general/os-release > package/base-files/files/etc/os-release
 curl -fsSL https://raw.githubusercontent.com/0118Add/X86-N1-Actions/main/scripts/os-release > package/base-files/files/etc/os-release
-#wget -O target/linux/x86/base-files/lib/preinit/01_sysinfo https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/01_sysinfo
 
 rm -rf feeds/packages/admin/zabbix
 rm -rf feeds/packages/net/onionshare-cli
