@@ -46,7 +46,7 @@ sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7
 
 #添加额外软件包
 rm -rf feeds/luci/applications/{luci-app-dae,luci-app-daed,luci-app-passwall,luci-app-openclash,luci-app-mjpg-streamer}
-rm -rf feeds/packages/net/{dae,daed,xray-core,v2ray-geodata}
+rm -rf feeds/packages/net/{dae,daed,sing-box,xray-core,v2ray-geodata}
 #git clone --depth=1 -b openwrt-23.05 https://github.com/openwrt/openwrt openwrt-openwrt 
 #cp -rf openwrt-openwrt/package/libs/mbedtls package/libs/mbedtls
 #rm -rf feeds/luci/applications/luci-app-dockerman
@@ -68,6 +68,7 @@ git clone --depth=1 -b dev https://github.com/vernesong/openclash package/opencl
 #rm -rf feeds/luci/applications/luci-app-homeproxy
 sed -i "s/ImmortalWrt/OpenWrt/g" feeds/luci/applications/luci-app-homeproxy/po/zh_Hans/homeproxy.po
 sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
+wget -O feeds/luci/applications/luci-app-homeproxy/root/etc/homeproxy/scripts/generate_client.uc https://raw.githubusercontent.com/0118Add/Openwrt-CI/main/x86/diy/x86_lede/generate_client.uc
 
 # mihomo momo
 #git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
