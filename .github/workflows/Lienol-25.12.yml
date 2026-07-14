@@ -27,8 +27,9 @@ jobs:
 
     - name: Show system
       run: |
-        echo -e "Total CPU cores\t: $(nproc)"
-        cat /proc/cpuinfo | grep 'model name'    
+        echo -e "💬 Server information \n"
+        echo -e "💻 Server running on Ubuntu: [ Release: $(cat /etc/os-release | grep VERSION_CODENAME | cut -d '=' -f2) / Host: $(arch) ] \n"
+        echo -e "🧮 Server CPU configuration information: \n$(cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c) \n"    
     
     - name: Init build dependencies
       env:
