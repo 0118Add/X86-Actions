@@ -19,6 +19,10 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
+mirror="https://raw.githubusercontent.com/sbwml/r4s_build_script/refs/heads/master"
+github="github.com"
+gitea="git.cooluc.com"
+
 # 修改主机名字（不能纯数字或者使用中文）
 sed -i "s/hostname='.*'/hostname='OpenWrt'/g" package/base-files/files/bin/config_generate
 #sed -i "s/OpenWrt /OPWRT/g" package/lean/default-settings/files/zzz-default-settings
@@ -156,9 +160,12 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #rm -rf feeds/packages/net/smartdns
 #cp -rf ${GITHUB_WORKSPACE}/general/smartdns feeds/packages/net
 
+# homeproxy
 #git clone --depth 1 -b dev https://github.com/immortalwrt/homeproxy package/luci-app-homeproxy
-#sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
-#sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
+#git clone --depth 1 -b V2 https://github.com/weicaixian86/luci-app-homeproxy package/luci-app-homeproxy
+git_sparse_clone main https://github.com/VIKINGYFY/packages sing-box luci-app-homeproxy
+sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
+sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
 
 # mihomo
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
@@ -170,11 +177,12 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
 #git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
 #git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed package/daed
-#git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
+git clone https://github.com/QiuSimons/luci-app-daed -b kix package/daed
+git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 
 # bpf-headers - 6.18
-#sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
-#curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
+sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
+curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
 
 # turboacc
 #git clone https://github.com/chenmozhijin/turboacc package/turboacc
@@ -187,8 +195,8 @@ sed -i 's/Turbo ACC 网络加速/网络加速/g' package/turboacc/luci-app-turbo
 git clone --depth=1 -b openwrt-25.12 https://github.com/immortalwrt/luci.git immortalwrt-luci
 cp -rf immortalwrt-luci/applications/luci-app-diskman feeds/luci/applications/luci-app-diskman
 ln -sf ../../../feeds/luci/applications/luci-app-diskman ./package/feeds/luci/luci-app-diskman
-cp -rf immortalwrt-luci/applications/luci-app-homeproxy feeds/luci/applications/luci-app-homeproxy
-ln -sf ../../../feeds/luci/applications/luci-app-homeproxy ./package/feeds/luci/luci-app-homeproxy
+#cp -rf immortalwrt-luci/applications/luci-app-homeproxy feeds/luci/applications/luci-app-homeproxy
+#ln -sf ../../../feeds/luci/applications/luci-app-homeproxy ./package/feeds/luci/luci-app-homeproxy
 cp -rf immortalwrt-luci/applications/luci-app-msd_lite feeds/luci/applications/luci-app-msd_lite
 ln -sf ../../../feeds/luci/applications/luci-app-msd_lite ./package/feeds/luci/luci-app-msd_lite
 cp -rf immortalwrt-luci/applications/luci-app-ramfree feeds/luci/applications/luci-app-ramfree
@@ -202,8 +210,8 @@ ln -sf ../../../feeds/luci/applications/luci-app-unblockneteasemusic ./package/f
 git clone --depth=1 -b openwrt-25.12 https://github.com/immortalwrt/packages.git immortalwrt-packages
 cp -rf immortalwrt-packages/net/msd_lite feeds/packages/net/msd_lite
 ln -sf ../../../feeds/packages/net/msd_lite ./package/feeds/packages/msd_lite
-cp -rf immortalwrt-packages/net/sing-box feeds/packages/net/sing-box
-ln -sf ../../../feeds/packages/net/sing-box ./package/feeds/packages/sing-box
+#cp -rf immortalwrt-packages/net/sing-box feeds/packages/net/sing-box
+#ln -sf ../../../feeds/packages/net/sing-box ./package/feeds/packages/sing-box
 cp -rf immortalwrt-packages/net/xray-core feeds/packages/net/xray-core
 ln -sf ../../../feeds/packages/net/xray-core ./package/feeds/packages/xray-core
 #cp -rf immortalwrt-packages/net/zerotier feeds/packages/net/zerotier
