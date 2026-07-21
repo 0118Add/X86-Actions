@@ -125,7 +125,7 @@ rm -rf target/linux/generic/hack-6.6/952-add-net-conntrack-events-support-multip
 #git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 #git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall-luci
 #git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/openwrt-passwall
-#git_sparse_clone main https://github.com/Openwrt-Passwall/openwrt-passwall-packages v2ray-geodata
+git_sparse_clone main https://github.com/Openwrt-Passwall/openwrt-passwall-packages v2ray-geodata
 #git clone https://github.com/sbwml/openwrt_helloworld package/openwrt_helloworld
 #git_sparse_clone main https://github.com/kiddin9/kwrt-packages coremark
 #git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
@@ -192,8 +192,8 @@ ln -sf ../../../feeds/luci/applications/luci-app-zerotier ./package/feeds/luci/l
 git clone --depth=1 -b openwrt-24.10 https://github.com/immortalwrt/packages.git immortalwrt-packages
 cp -rf immortalwrt-packages/net/msd_lite feeds/packages/net/msd_lite
 ln -sf ../../../feeds/packages/net/msd_lite ./package/feeds/packages/msd_lite
-cp -rf immortalwrt-packages/net/sing-box feeds/packages/net/sing-box
-ln -sf ../../../feeds/packages/net/sing-box ./package/feeds/packages/sing-box
+#cp -rf immortalwrt-packages/net/sing-box feeds/packages/net/sing-box
+#ln -sf ../../../feeds/packages/net/sing-box ./package/feeds/packages/sing-box
 cp -rf immortalwrt-packages/net/xray-core feeds/packages/net/xray-core
 ln -sf ../../../feeds/packages/net/xray-core ./package/feeds/packages/xray-core
 cp -rf immortalwrt-packages/net/zerotier feeds/packages/net/zerotier
