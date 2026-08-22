@@ -99,7 +99,9 @@ git clone --depth=1 -b openwrt-25.12 https://github.com/sbwml/autocore-arm packa
 
 # Default settings
 rm -rf package/default-settings
-git clone https://github.com/sbwml/default-settings package/default-settings
+rm -rf feeds/packages/utils/coremark
+#git clone https://github.com/sbwml/default-settings package/default-settings
+git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark default-settings
 
 # golang 1.26
 rm -rf feeds/packages/lang/golang
