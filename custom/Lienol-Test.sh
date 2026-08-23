@@ -235,8 +235,15 @@ sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' feeds/packages/ut
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/utils/ttyd/files/ttyd.init
 
 # Dockerman
-#git clone https://github.com/sbwml/luci-app-dockerman package/luci-app-dockerman
-#sed -i 's/"admin/"admin\/services/g' package/luci-app-dockerman/root/usr/share/luci/menu.d/luci-app-dockerman.json
+git clone https://github.com/sbwml/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
+rm -rf feeds/packages/utils/{docker,dockerd,containerd,runc}
+git clone https://github.com/sbwml/packages_utils_docker feeds/packages/utils/docker
+git clone https://github.com/sbwml/packages_utils_dockerd feeds/packages/utils/dockerd
+git clone https://github.com/sbwml/packages_utils_containerd feeds/packages/utils/containerd
+git clone https://github.com/sbwml/packages_utils_runc feeds/packages/utils/runc
+sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/root/usr/share/luci/menu.d/luci-app-dockerman.json
+mkdir -p feeds/packages/utils/dockerd/patches
+curl -s https://raw.githubusercontent.com/0118Add/X86_64-Test/main/general/patches/001-skip-copy-nested-binaries.patch > feeds/packages/utils/dockerd/patches/001-skip-copy-nested-binaries.patch
 
 # Realtek Ethernet driver - R8168 & R8125 & R8126 & R8152 & R8101 & r8127
 rm -rf package/kernel/{r8168,r8101,r8125,r8126,r8127}
@@ -342,15 +349,6 @@ sed -i 's/解除网易云音乐播放限制/音乐解锁/g' feeds/luci/applicati
 #sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/model/cbi/dockerman/*.lua
 #sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/view/dockerman/*.htm
 #sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/view/dockerman/cbi/*.htm
-git clone https://github.com/sbwml/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/packages/utils/{docker,dockerd,containerd,runc}
-git clone https://github.com/sbwml/packages_utils_docker feeds/packages/utils/docker
-git clone https://github.com/sbwml/packages_utils_dockerd feeds/packages/utils/dockerd
-git clone https://github.com/sbwml/packages_utils_containerd feeds/packages/utils/containerd
-git clone https://github.com/sbwml/packages_utils_runc feeds/packages/utils/runc
-sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/root/usr/share/luci/menu.d/luci-app-dockerman.json
-mkdir -p feeds/packages/utils/dockerd/patches
-curl -s https://raw.githubusercontent.com/0118Add/X86_64-Test/main/general/patches/001-skip-copy-nested-binaries.patch > feeds/packages/utils/dockerd/patches/001-skip-copy-nested-binaries.patch
 
 # 调整 tailscale zerotier 到 服务 菜单
 #sed -i 's/vpn/services/g' feeds/luci/applications/luci-app-zerotier/root/usr/share/luci/menu.d/luci-app-zerotier.json
