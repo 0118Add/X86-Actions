@@ -178,8 +178,6 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/l
 # mihomo
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
 #git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
-#sed -i 's/MihomoTProxy/Mihomo/g' package/openwrt-mihomo/luci-app-mihomo/po/zh_Hans/mihomo.po
-#sed -i 's/MihomoTProxy/Mihomo/g' package/openwrt-mihomo/luci-app-mihomo/root/usr/share/luci/menu.d/luci-app-mihomo.json
 
 # dae daed
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
@@ -228,6 +226,12 @@ ln -sf ../../../feeds/packages/net/msd_lite ./package/feeds/packages/msd_lite
 #ln -sf ../../../feeds/packages/net/zerotier ./package/feeds/packages/zerotier
 #sed -i "s/ImmortalWrt/OpenWrt/g" feeds/luci/applications/luci-app-homeproxy/po/zh_Hans/homeproxy.po
 #sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" feeds/luci/applications/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
+
+# ttyd
+#sed -i 's/services/system/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
+sed -i '3 a\\t\t"order": 50,' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
+sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' feeds/packages/utils/ttyd/files/ttyd.init
+sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/utils/ttyd/files/ttyd.init
 
 # Dockerman
 #git clone https://github.com/sbwml/luci-app-dockerman package/luci-app-dockerman
