@@ -117,10 +117,9 @@ rm -rf package/public/autosamba
 rm -rf package/network/utils/fullconenat-nft
 rm -rf feeds/packages/net/{sing-box,v2ray-geodata,xray-core,zerotier}
 rm -rf feeds/lienol/other/luci-app-diskman
-rm -rf feeds/lienol/other/luci-app-dockerman
+#rm -rf feeds/lienol/other/luci-app-dockerman
 rm -rf feeds/lienol/other/lean/mt/luci-app-mtwifi
 rm -rf feeds/lienol/other/lean/luci-app-mwan3helper
-#rm -rf feeds/lienol/other/luci-app-dockerman
 rm -rf feeds/lienol/other/lean/luci-app-autoreboot
 rm -rf feeds/lienol/other/lean/luci-app-turboacc
 rm -rf feeds/lienol/other/lean/luci-app-zerotier
@@ -235,13 +234,13 @@ sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' feeds/packages/ut
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/utils/ttyd/files/ttyd.init
 
 # Dockerman
-git clone https://github.com/sbwml/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/packages/utils/{docker,dockerd,containerd,runc}
-git clone https://github.com/sbwml/packages_utils_docker feeds/packages/utils/docker
-git clone https://github.com/sbwml/packages_utils_dockerd feeds/packages/utils/dockerd
-git clone https://github.com/sbwml/packages_utils_containerd feeds/packages/utils/containerd
-git clone https://github.com/sbwml/packages_utils_runc feeds/packages/utils/runc
-sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/root/usr/share/luci/menu.d/luci-app-dockerman.json
+#git clone https://github.com/sbwml/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
+#rm -rf feeds/packages/utils/{docker,dockerd,containerd,runc}
+#git clone https://github.com/sbwml/packages_utils_docker feeds/packages/utils/docker
+#git clone https://github.com/sbwml/packages_utils_dockerd feeds/packages/utils/dockerd
+#git clone https://github.com/sbwml/packages_utils_containerd feeds/packages/utils/containerd
+#git clone https://github.com/sbwml/packages_utils_runc feeds/packages/utils/runc
+#sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/root/usr/share/luci/menu.d/luci-app-dockerman.json
 mkdir -p feeds/packages/utils/dockerd/patches
 curl -s https://raw.githubusercontent.com/0118Add/X86_64-Test/main/general/patches/001-skip-copy-nested-binaries.patch > feeds/packages/utils/dockerd/patches/001-skip-copy-nested-binaries.patch
 
@@ -344,11 +343,11 @@ sed -i 's/解除网易云音乐播放限制/音乐解锁/g' feeds/luci/applicati
 #sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
 
 # 调整 Dockerman 到 服务 菜单
-#sed -i 's/"admin",/"admin","services",/g' feeds/lienol/other/luci-app-dockerman/luasrc/controller/*.lua
-#sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/model/*.lua
-#sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/model/cbi/dockerman/*.lua
-#sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/view/dockerman/*.htm
-#sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/view/dockerman/cbi/*.htm
+sed -i 's/"admin",/"admin","services",/g' feeds/lienol/other/luci-app-dockerman/luasrc/controller/*.lua
+sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/model/*.lua
+sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/model/cbi/dockerman/*.lua
+sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/view/dockerman/*.htm
+sed -i 's/"admin/"admin\/services/g' feeds/lienol/other/luci-app-dockerman/luasrc/view/dockerman/cbi/*.htm
 
 # 调整 tailscale zerotier 到 服务 菜单
 #sed -i 's/vpn/services/g' feeds/luci/applications/luci-app-zerotier/root/usr/share/luci/menu.d/luci-app-zerotier.json
