@@ -97,10 +97,10 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 git clone --depth=1 -b openwrt-25.12 https://github.com/sbwml/autocore-arm package/autocore
 
 # Default settings
-rm -rf package/default-settings
+#rm -rf package/default-settings
 rm -rf feeds/packages/utils/coremark
 #git clone https://github.com/sbwml/default-settings package/default-settings
-git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark default-settings
+git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark
 
 # golang 1.26
 rm -rf feeds/packages/lang/golang
