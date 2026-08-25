@@ -149,6 +149,9 @@ friendlyarm,nanopi-r76s)
 esac
 uci commit network
 
+sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='OpenWrt 25.12'" >> /etc/openwrt_release
+
 # init
 devices_setup
 
