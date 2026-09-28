@@ -99,13 +99,28 @@ git clone --depth=1 -b openwrt-25.12 https://github.com/sbwml/autocore-arm packa
 # Default settings
 rm -rf package/default-settings
 rm -rf feeds/packages/utils/coremark
-#git clone https://github.com/sbwml/default-settings package/default-settings
-git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark default-settings
-wget -O ./package/default-settings/default/zzz-default-settings https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/zzz-default-settings
+git clone https://github.com/sbwml/default-settings package/default-settings
+git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark
+#wget -O ./package/default-settings/default/zzz-default-settings https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/zzz-default-settings
+# 定义zzz-default-settings路径
+ZZZ_FILE=$(find package/ feeds/ -type f -name "zzz-default-settings" 2>/dev/null | head -n 1)
 
-# golang 1.26
+if [ -n "$ZZZ_FILE" ]; then
+    echo "发现 zzz-default-settings 路径: $ZZZ_FILE"
+    
+    sed -i '/disable coremark/d' "$ZZZ_FILE"
+    sed -i '/sed -i.*coremark.*crontabs/d' "$ZZZ_FILE"
+    sed -i '/crontab \/etc\/crontabs\/root/d' "$ZZZ_FILE"
+    sed -i '/coremark/,/crontabs\/root/d' "$ZZZ_FILE"
+
+    echo "=== 已成功从 zzz-default-settings 中移除 Coremark 相关逻辑 ==="
+else
+    echo "⚠️ 未找到 zzz-default-settings 文件，请检查源码目录结构"
+fi
+
+# golang 27.x
 rm -rf feeds/packages/lang/golang
-git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 27.x feeds/packages/lang/golang
 
 # 预编译 node
 rm -rf feeds/packages/lang/node
@@ -170,8 +185,8 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #cp -rf ${GITHUB_WORKSPACE}/general/smartdns feeds/packages/net
 
 # homeproxy
-#git clone --depth 1 -b dev https://github.com/immortalwrt/homeproxy package/luci-app-homeproxy
-git clone --depth 1 -b master https://github.com/fun200/homeproxy_plus package/luci-app-homeproxy
+git clone -b master --depth 1 https://github.com/szwjp/luci-app-homeproxy package/luci-app-homeproxy
+#git clone --depth 1 -b master https://github.com/fun200/homeproxy_plus package/luci-app-homeproxy
 #git_sparse_clone main https://github.com/VIKINGYFY/packages sing-box luci-app-homeproxy
 sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
 sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
@@ -242,8 +257,8 @@ sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/ut
 #git clone https://github.com/sbwml/packages_utils_containerd feeds/packages/utils/containerd
 #git clone https://github.com/sbwml/packages_utils_runc feeds/packages/utils/runc
 #sed -i 's/"admin/"admin\/services/g' feeds/luci/applications/luci-app-dockerman/root/usr/share/luci/menu.d/luci-app-dockerman.json
-mkdir -p feeds/packages/utils/dockerd/patches
-curl -s https://raw.githubusercontent.com/0118Add/X86_64-Test/main/general/patches/001-skip-copy-nested-binaries.patch > feeds/packages/utils/dockerd/patches/001-skip-copy-nested-binaries.patch
+#mkdir -p feeds/packages/utils/dockerd/patches
+#curl -s https://raw.githubusercontent.com/0118Add/X86_64-Test/main/general/patches/001-skip-copy-nested-binaries.patch > feeds/packages/utils/dockerd/patches/001-skip-copy-nested-binaries.patch
 
 # Realtek Ethernet driver - R8168 & R8125 & R8126 & R8152 & R8101 & r8127
 rm -rf package/kernel/{r8168,r8101,r8125,r8126,r8127}
