@@ -101,22 +101,7 @@ rm -rf package/default-settings
 rm -rf feeds/packages/utils/coremark
 git clone https://github.com/sbwml/default-settings package/default-settings
 git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark
-#wget -O ./package/default-settings/default/zzz-default-settings https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/zzz-default-settings
-# 定义zzz-default-settings路径
-ZZZ_FILE=$(find package/ feeds/ -type f -name "zzz-default-settings" 2>/dev/null | head -n 1)
-
-if [ -n "$ZZZ_FILE" ]; then
-    echo "发现 zzz-default-settings 路径: $ZZZ_FILE"
-    
-    sed -i '/disable coremark/d' "$ZZZ_FILE"
-    sed -i '/sed -i.*coremark.*crontabs/d' "$ZZZ_FILE"
-    sed -i '/crontab \/etc\/crontabs\/root/d' "$ZZZ_FILE"
-    sed -i '/coremark/,/crontabs\/root/d' "$ZZZ_FILE"
-
-    echo "=== 已成功从 zzz-default-settings 中移除 Coremark 相关逻辑 ==="
-else
-    echo "⚠️ 未找到 zzz-default-settings 文件，请检查源码目录结构"
-fi
+wget -O ./package/default-settings/default/zzz-default-settings https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/zzz-default-settings
 
 # golang 27.x
 rm -rf feeds/packages/lang/golang
