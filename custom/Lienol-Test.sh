@@ -171,6 +171,9 @@ git clone -b main --depth 1 https://github.com/szwjp/luci-app-homeproxy package/
 # mihomo
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
 git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
+sed -i 's/PKG_VERSION:=.*/PKG_VERSION:=1.19.32/g' package/OpenWrt-nikki/mihomo-meta/Makefile
+sed -i 's/PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=adeda246f528b8b91c64ef1202157140d6f3bb5e855bccde30000188f367a0c32/g' package/OpenWrt-nikki/mihomo-meta/Makefile
+sed -i 's/PKG_BUILD_VERSION:=.*/PKG_BUILD_VERSION:=1.19.32/g' package/OpenWrt-nikki/mihomo-meta/Makefile
 
 # dae daed
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
