@@ -162,7 +162,7 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #cp -rf ${GITHUB_WORKSPACE}/general/smartdns feeds/packages/net
 
 # homeproxy
-#git clone -b master --depth 1 https://github.com/szwjp/luci-app-homeproxy package/luci-app-homeproxy
+git clone -b master --depth 1 https://github.com/szwjp/luci-app-homeproxy package/luci-app-homeproxy
 #git clone --depth 1 -b master https://github.com/fun200/homeproxy_plus package/luci-app-homeproxy
 #git_sparse_clone main https://github.com/VIKINGYFY/packages sing-box luci-app-homeproxy
 #sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
@@ -170,11 +170,11 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 
 # mihomo
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
-#git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
+git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
 
 # dae daed
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
-git clone https://github.com/kenzok8/openwrt-clashoo package/clashoo
+#git clone https://github.com/kenzok8/openwrt-clashoo package/clashoo
 #git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
 #git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed package/daed
 #git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
