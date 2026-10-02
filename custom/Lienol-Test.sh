@@ -119,9 +119,9 @@ git clone https://github.com/sbwml/default-settings package/default-settings
 git_sparse_clone master https://github.com/8688Add/openwrt_pkgs coremark
 wget -O ./package/default-settings/default/zzz-default-settings https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/zzz-default-settings
 
-# golang 27.x
+# golang 26.x
 rm -rf feeds/packages/lang/golang
-git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 27.x feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
 
 # 预编译 node
 rm -rf feeds/packages/lang/node
