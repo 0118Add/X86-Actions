@@ -170,7 +170,8 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/l
 
 # mihomo
 #git clone https://github.com/nikkinikki-org/OpenWrt-momo package/OpenWrt-momo
-git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
+#git clone https://github.com/nikkinikki-org/OpenWrt-nikki  package/OpenWrt-nikki
+git clone -b main --depth 1 https://github.com/YiXuanZX/OpenWrt-nikki package/OpenWrt-nikki
 
 # dae daed
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
