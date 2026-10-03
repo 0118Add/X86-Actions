@@ -133,9 +133,8 @@ git clone --depth=1 -b packages-25.12 https://github.com/sbwml/feeds_packages_la
 #git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 #git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall-luci
 #git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/openwrt-passwall
-git_sparse_clone main https://github.com/Openwrt-Passwall/openwrt-passwall-packages sing-box v2ray-geodata xray-core
-sed -i 's/PKG_VERSION:=.*/PKG_VERSION:=1.13.18/g' package/sing-box/Makefile
-sed -i 's/PKG_HASH:=.*/PKG_HASH:=e41ed9d7adecd7597c1d5cc91818366a9538d94b41c244225ac40ac948c643f5/g' package/sing-box/Makefile
+git_sparse_clone v5 https://github.com/sbwml/openwrt_helloworld sing-box luci-app-homeproxy
+git_sparse_clone main https://github.com/Openwrt-Passwall/openwrt-passwall-packages v2ray-geodata xray-core
 #git clone https://github.com/sbwml/openwrt_helloworld package/openwrt_helloworld
 #git_sparse_clone main https://github.com/kiddin9/kwrt-packages coremark
 #git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
@@ -164,7 +163,7 @@ git clone https://github.com/sirpdboy/luci-app-partexp package/luci-app-partexp
 #cp -rf ${GITHUB_WORKSPACE}/general/smartdns feeds/packages/net
 
 # homeproxy
-git clone --depth 1 -b master https://github.com/fun200/homeproxy_plus package/luci-app-homeproxy
+#git clone --depth 1 -b master https://github.com/fun200/homeproxy_plus package/luci-app-homeproxy
 #git_sparse_clone main https://github.com/VIKINGYFY/packages sing-box luci-app-homeproxy
 sed -i "s/ImmortalWrt/OpenWrt/g" package/luci-app-homeproxy/po/zh_Hans/homeproxy.po
 sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/luci-static/resources/view/homeproxy/{client.js,server.js}
