@@ -121,7 +121,7 @@ wget -O ./package/default-settings/default/zzz-default-settings https://raw.gith
 
 # golang 26.x
 rm -rf feeds/packages/lang/golang
-git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang -b 27.x feeds/packages/lang/golang
 
 # 预编译 node
 rm -rf feeds/packages/lang/node
@@ -189,9 +189,21 @@ git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
 curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
 
+# x86_64 - target 6.18
+curl -s $mirror/openwrt/patch/openwrt-6.x/x86/64/config-6.18 > target/linux/x86/64/config-6.18
+curl -s $mirror/openwrt/patch/openwrt-6.x/x86/config-6.18 > target/linux/x86/config-6.18
+mkdir -p target/linux/x86/patches-6.18
+curl -s $mirror/openwrt/patch/openwrt-6.x/x86/patches-6.18/100-fix_cs5535_clockevt.patch > target/linux/x86/patches-6.18/100-fix_cs5535_clockevt.patch
+curl -s $mirror/openwrt/patch/openwrt-6.x/x86/patches-6.18/103-pcengines_apu6_platform.patch > target/linux/x86/patches-6.18/103-pcengines_apu6_platform.patch
+# x86_64 - target
+sed -ri "s/(KERNEL_PATCHVER:=)[^\"]*/\16.18/" target/linux/x86/Makefile
+sed -i '/KERNEL_PATCHVER/a\KERNEL_TESTING_PATCHVER:=6.12' target/linux/x86/Makefile
+curl -s $mirror/openwrt/patch/openwrt-6.x/x86/base-files/etc/board.d/01_leds > target/linux/x86/base-files/etc/board.d/01_leds
+curl -s $mirror/openwrt/patch/openwrt-6.x/x86/base-files/etc/board.d/02_network > target/linux/x86/base-files/etc/board.d/02_network
+
 # turboacc
 #git clone https://github.com/chenmozhijin/turboacc package/turboacc
-sed -i '/PKG_INSTALL:=/iPKG_FIXUP:=autoreconf' package/libs/libnftnl/Makefile
+#sed -i '/PKG_INSTALL:=/iPKG_FIXUP:=autoreconf' package/libs/libnftnl/Makefile
 #curl -sSL https://raw.githubusercontent.com/mufeng05/turboacc/main/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
 #sed -i 's/Turbo ACC 网络加速/网络加速/g' package/turboacc/luci-app-turboacc/po/zh_Hans/turboacc.po
 
