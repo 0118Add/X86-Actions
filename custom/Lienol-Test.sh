@@ -176,7 +176,8 @@ sed -i "s/ImmortalWrt proxy/OpenWrt proxy/g" package/luci-app-homeproxy/htdocs/l
 # dae daed
 #git clone https://github.com/kenzok8/openwrt-daede package/daede
 #git clone https://github.com/kenzok8/openwrt-clashoo package/clashoo
-git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
+git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-honk package/honk
+#git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-dae package/dae
 #git clone -b kix --depth 1 https://github.com/QiuSimons/luci-app-daed package/daed
 git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 #sed -i 's/PKG_VERSION:=.*/PKG_VERSION:=2026.06.14/g' package/daed/daed/Makefile
@@ -188,13 +189,6 @@ git clone https://github.com/QiuSimons/vmlinux-btf package/vmlinux-btf
 # bpf-headers - 6.18
 sed -ri "s/(PKG_PATCHVER:=)[^\"]*/\16.18/" package/kernel/bpf-headers/Makefile
 curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch > package/kernel/bpf-headers/patches/900-fix-build.patch
-
-# x86_64 - target 6.18
-curl -s $mirror/openwrt/patch/openwrt-6.x/x86/64/config-6.18 > target/linux/x86/64/config-6.18
-curl -s $mirror/openwrt/patch/openwrt-6.x/x86/config-6.18 > target/linux/x86/config-6.18
-mkdir -p target/linux/x86/patches-6.18
-curl -s $mirror/openwrt/patch/openwrt-6.x/x86/patches-6.18/100-fix_cs5535_clockevt.patch > target/linux/x86/patches-6.18/100-fix_cs5535_clockevt.patch
-curl -s $mirror/openwrt/patch/openwrt-6.x/x86/patches-6.18/103-pcengines_apu6_platform.patch > target/linux/x86/patches-6.18/103-pcengines_apu6_platform.patch
 
 # turboacc
 #git clone https://github.com/chenmozhijin/turboacc package/turboacc
