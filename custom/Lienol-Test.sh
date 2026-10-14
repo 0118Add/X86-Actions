@@ -197,6 +197,11 @@ curl -s $mirror/openwrt/patch/packages-patches/bpf-headers/900-fix-build.patch >
 #curl -sSL https://raw.githubusercontent.com/mufeng05/turboacc/main/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
 #sed -i 's/Turbo ACC 网络加速/网络加速/g' package/turboacc/luci-app-turboacc/po/zh_Hans/turboacc.po
 
+# 克隆lean-luci仓库
+git clone --depth=1 -b openwrt-25.12 https://github.com/coolsnowwolf/luci lean-luci
+cp -rf lean-luci/applications/luci-app-oui feeds/luci/applications/luci-app-oui
+ln -sf ../../../feeds/luci/applications/luci-app-oui ./package/feeds/luci/luci-app-oui
+
 # 克隆immortalwrt-luci packages仓库
 git clone --depth=1 -b openwrt-25.12 https://github.com/immortalwrt/luci.git immortalwrt-luci
 cp -rf immortalwrt-luci/applications/luci-app-diskman feeds/luci/applications/luci-app-diskman
