@@ -273,14 +273,13 @@ curl -s $mirror/openwrt/patch/firewall4/100-openwrt-firewall4-add-custom-nft-com
 sed -i 's|$(PROJECT_GIT)/project|https://github.com/openwrt|g' package/network/config/firewall4/Makefile
 # libnftnl
 mkdir -p package/libs/libnftnl/patches
-curl -s $mirror/openwrt/patch/firewall4/libnftnl/0001-libnftnl-add-fullcone-expression-support.patch > package/libs/libnftnl/patches/0001-libnftnl-add-fullcone-expression-support.patch
-curl -s $mirror/openwrt/patch/firewall4/libnftnl/0002-libnftnl-add-brcm-fullcone-support.patch > package/libs/libnftnl/patches/0002-libnftnl-add-brcm-fullcone-support.patch
-# fix build on rhel9
-sed -i '/^PKG_BUILD_FLAGS[[:space:]]*:/aPKG_FIXUP:=autoreconf' package/libs/libnftnl/Makefile
+# Remove the previous replacements when rerunning preparation on an existing tree.
+rm -f package/libs/libnftnl/patches/{0001-libnftnl-add-fullcone-expression-support,0002-libnftnl-add-brcm-fullcone-support,0003-libnftnl-fullcone-adapt-setter-api}.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/libnftnl/002-libnftnl-add-brcm-fullcone-support.patch" package/libs/libnftnl/patches/
 # nftables
 mkdir -p package/network/utils/nftables/patches
-curl -s $mirror/openwrt/patch/firewall4/nftables/0001-nftables-add-fullcone-expression-support.patch > package/network/utils/nftables/patches/0001-nftables-add-fullcone-expression-support.patch
-curl -s $mirror/openwrt/patch/firewall4/nftables/0002-nftables-add-brcm-fullconenat-support.patch > package/network/utils/nftables/patches/0002-nftables-add-brcm-fullconenat-support.patch
+rm -f package/network/utils/nftables/patches/{0001-nftables-add-fullcone-expression-support,0002-nftables-add-brcm-fullconenat-support}.patch
+cp -f "$GITHUB_WORKSPACE/data/patches/nftables/003-nftables-add-brcm-fullconenat-support.patch" package/network/utils/nftables/patches/
 
 # FullCone module
 rm -rf package/network/utils/fullconenat-nft
@@ -291,6 +290,9 @@ git clone https://github.com/sbwml/packages_new_nat6 package/new/nat6 -b openwrt
 
 # natflow
 git clone https://github.com/sbwml/package_new_natflow package/new/natflow
+
+# luci-app-firewall
+curl -s https://raw.githubusercontent.com/openwrt/luci/refs/heads/master/applications/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js > customfeeds/luci/applications/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js
 
 # Patch Luci add nft_fullcone/bcm_fullcone & shortcut-fe & natflow & ipv6-nat & custom nft command option
 pushd feeds/luci
@@ -306,8 +308,6 @@ popd
 # kernel patch
 # btf: silence btf module warning messages
 curl -s $mirror/openwrt/patch/kernel-6.18/btf/990-btf-silence-btf-module-warning-messages.patch > target/linux/generic/hack-6.18/990-btf-silence-btf-module-warning-messages.patch
-# cpu model
-curl -s $mirror/openwrt/patch/kernel-6.18/arm64/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch > target/linux/generic/hack-6.18/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch
 # bcm-fullcone
 curl -s $mirror/openwrt/patch/kernel-6.18/net/982-add-bcm-fullcone-support.patch > target/linux/generic/hack-6.18/982-add-bcm-fullcone-support.patch
 curl -s $mirror/openwrt/patch/kernel-6.18/net/983-add-bcm-fullcone-nft_masq-support.patch > target/linux/generic/hack-6.18/983-add-bcm-fullcone-nft_masq-support.patch
