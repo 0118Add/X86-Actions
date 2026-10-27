@@ -232,9 +232,9 @@ cp -rf ../openwrt_ma/package/network/ipv6/odhcp6c ./package/network/ipv6/odhcp6c
 echo > ./feeds/packages/utils/watchcat/files/watchcat.config
 
 # 后续修改
-rm -rf package/new/imm_pkg/sing-box
-rm -rf package/new/homeproxy
-rm -rf package/new/luci-app-unblockneteasemusic
+rm -rf package/new/apps/imm_pkg/sing-box
+rm -rf package/new/apps/homeproxy
+rm -rf package/new/apps/luci-app-unblockneteasemusic
 
 git clone https://github.com/YiXuanZX/OpenWrt-nikki  package/OpenWrt-nikki
 cp -rf ../openwrt_helloworld ./package/new
