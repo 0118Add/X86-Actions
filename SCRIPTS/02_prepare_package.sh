@@ -136,12 +136,12 @@ rm -rf ./package/new/shortcut-fe
 # and from addition-trans-zh's DEPENDS, which would otherwise reference a package
 # that no longer exists (07_fw3.sh does the iptables-side equivalent).
 rm -rf ./package/new/lede_pkg/fullconenat-nft
-sed -i 's/ +kmod-nft-fullcone//' ./package/new/apps/addition-trans-zh/Makefile
+sed -i 's/ +kmod-nft-fullcone//' ./package/new/addition-trans-zh/Makefile
 rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box,frp,microsocks,shadowsocks-libev,zerotier,daed}
 rm -rf feeds/luci/applications/{luci-app-frps,luci-app-frpc,luci-app-zerotier,luci-app-filemanager}
 rm -rf feeds/packages/utils/coremark
 rm -rf package/new/trojan-plus
-sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' ./package/new/apps/openwrt-einat-ebpf/Makefile
+sed -i 's/+@KERNEL_DEBUG_INFO_BTF/+vmlinux-btf/' ./package/new/openwrt-einat-ebpf/Makefile
 #sed -i 's/PKG_VERSION:=.*/PKG_VERSION:=2026.06.14/g' package/new/luci-app-daed/daed/Makefile
 #sed -i 's/DAED_VERSION:=.*/DAED_VERSION:=daed-4d6a433/g' package/new/luci-app-daed/daed/Makefile
 #sed -i 's/WING_VERSION:=.*/WING_VERSION:=wing-dc50308/g' package/new/luci-app-daed/daed/Makefile
@@ -156,7 +156,7 @@ wget https://github.com/coolsnowwolf/lede/raw/refs/heads/master/target/linux/roc
 wget https://github.com/coolsnowwolf/lede/raw/refs/heads/master/target/linux/rockchip/patches-6.12/992-rockchip-rk3399-overclock-to-2.2-1.8-GHz.patch -O target/linux/rockchip/patches-6.12/992.patch
 # 更换 Nodejs 版本
 rm -rf ./feeds/packages/lang/node
-rm -rf ./package/new/apps/feeds_packages_lang_node-prebuilt
+rm -rf ./package/new/feeds_packages_lang_node-prebuilt
 #cp -rf ../OpenWrt-Add/feeds_packages_lang_node-prebuilt ./feeds/packages/lang/node
 git clone --depth=1 -b packages-25.12 https://github.com/sbwml/feeds_packages_lang_node-prebuilt feeds/packages/lang/node
 # 更换 golang 版本
@@ -232,9 +232,9 @@ cp -rf ../openwrt_ma/package/network/ipv6/odhcp6c ./package/network/ipv6/odhcp6c
 echo > ./feeds/packages/utils/watchcat/files/watchcat.config
 
 # 后续修改
-rm -rf package/new/apps/imm_pkg/sing-box
-rm -rf package/new/apps/homeproxy
-rm -rf package/new/apps/luci-app-unblockneteasemusic
+rm -rf package/new/imm_pkg/sing-box
+rm -rf package/new/homeproxy
+rm -rf package/new/luci-app-unblockneteasemusic
 
 git clone https://github.com/YiXuanZX/OpenWrt-nikki  package/OpenWrt-nikki
 cp -rf ../openwrt_helloworld ./package/new
@@ -251,7 +251,7 @@ ln -sf ../../../feeds/luci/applications/luci-app-unblockneteasemusic ./package/f
 sed -i 's/解除网易云音乐播放限制/音乐解锁/g' feeds/luci/applications/luci-app-unblockneteasemusic/root/usr/share/luci/menu.d/luci-app-unblockneteasemusic.json
 
 curl -fsSL https://raw.githubusercontent.com/0118Add/X86-Actions/main/general/25_storage.js > ./feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/25_storage.js
-curl -fsSL https://raw.githubusercontent.com/immortalwrt/luci/master/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js > ./package/new/apps/autocore-arm/files/generic/29_ports.js
+curl -fsSL https://raw.githubusercontent.com/immortalwrt/luci/master/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/29_ports.js > ./package/new/autocore-arm/files/generic/29_ports.js
 
 # TTYD
 sed -i 's/services/system/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
@@ -273,7 +273,7 @@ find ./target/linux/ -name "config-${KERNEL_VERSION}" | xargs -I{} sh -c "echo '
 ### 最后的收尾工作 ###
 # Lets Fuck
 mkdir -p package/base-files/files/usr/bin
-cp -rf ../OpenWrt-Add/core/tools/clean-overlay.sh ./package/base-files/files/usr/bin/fuck
+cp -rf ../OpenWrt-Add/fuck ./package/base-files/files/usr/bin/fuck
 # 生成默认配置及缓存
 rm -rf .config
 sed -i 's,CONFIG_WERROR=y,# CONFIG_WERROR is not set,g' target/linux/generic/config-${KERNEL_VERSION}
